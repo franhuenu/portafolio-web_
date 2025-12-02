@@ -1,0 +1,46 @@
+.p5-container {
+  width: 100%;
+  text-align: center;
+  margin: 80px auto;
+}
+
+.p5-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.p5-frame-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.p5-frame {
+  width: 960px;      
+  height: 635px;     
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+
+/* 📱 Pantallas medianas (tablets < 900px) */
+@media (max-width: 900px) {
+  .p5-frame {
+    width: 90%;
+    height: 60vw; /* mantiene proporción jajaja */
+  }
+}
+
+/* 📱📱 Pantallas pequeñas (480px o menos) */
+@media (max-width: 480px) {
+  .p5-frame {
+    width: 100%;
+    height: 75vw;   
+    border-radius: 8px;
+  }
+
+  .p5-title {
+    font-size: 1.5rem;
+  }
+}

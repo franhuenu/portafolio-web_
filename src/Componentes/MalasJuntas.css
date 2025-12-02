@@ -1,0 +1,802 @@
+/* Reiniciar */
+*{ 
+  box-sizing: border-box;  /* Incluye padding y border dentro del width/height */
+  margin: 0;  /* Elimina márgenes por defecto */
+  padding: 0; /* Elimina padding por defecto */
+
+
+/* Ajustes básicos de html, body y el root de React :3 */
+}
+
+html, body, #root { 
+  min-height: 100%; /* Asegura que siempre ocupe al menos toda la altura de la pantalla */
+  overscroll-behavior: none; /* Evita rebote al hacer scroll en algunos navegadores */
+}
+
+/*  Body y tipografia */
+body {
+  font-family: "Instrument Sans", sans-serif; /* Fuente principal */
+  color: #111;
+  background: #ffffff; 
+  -webkit-font-smoothing: antialiased;  /* Mejora suavizado de fuentes en Chrome/Safari */
+  -moz-osx-font-smoothing: grayscale; /* Mejora suavizado de fuentes en Firefox */
+}
+
+a { color: inherit; } /* Enlaces heredan color y no tienen decoración por defecto */
+
+/* UTILIDADES */
+/* Contenedor centralizado con ancho máximo */
+.container { 
+  width: min(1200px, 92%); /* Máximo 1200px o 92% del ancho de pantalla */
+  margin: 0 auto; /* Centrado horizontal */
+}
+
+
+/* NAVBAR */
+/* Barra de navegación fija */
+.navbar {
+  position: fixed; /* Fija al top */
+  top: 0; left: 0; right: 0; /* Ocupa todo el ancho superior */
+  height: 64px; /* Altura de la barra */
+  background: #fff; /* Fondo blanco */
+  display: flex; /* Layout flexible */
+  align-items: center; /* Centra verticalmente los items */
+  border-bottom: 1px solid rgba(0,0,0,0.06); /* Sutil borde inferior */
+  z-index: 9999; /* Siempre encima del contenido ,siempreeeee*/
+}
+
+/* Contenedor interno de navbar */
+.navbar .container {
+  display: flex; /* Layout horizontal */
+  align-items: center; /* Centra vertical */
+}
+
+/* Logo de la navbar */
+.nav-logo {
+  width: 48px; /* Ancho del logo */
+  height: 48px; /* Alto del logo */
+  object-fit: contain; /* Escala contenido sin deformar */
+  margin-left: 20px; /* Separación desde la izquierda */
+}
+
+/* Elementos a la derecha de la navbar */
+.nav-right {
+  margin-left: auto; /* Empuja a la derecha */
+  margin-right: 20px; /* Separación desde borde derecho */
+}
+
+/* Estilos para los enlaces del navbar */
+.nav-right a {
+  margin-left: 20px; /* Separación entre enlaces */
+  text-decoration: none; /* Sin subrayado */
+  font-size: 18px; /* Tamaño de fuente */
+  color: #0b0b0b; /* Color de texto */
+  letter-spacing: 0.5px; /* Espaciado entre letras */
+  font-family: "Instrument Sans", sans-serif; /* Fuente */
+}
+
+/*Estilo de regresar*/
+.regresar-btn {
+  margin-left: 50px;
+  text-decoration: none;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  font-family: "Instrument Sans", sans-serif;
+  padding: 6px 12px;
+}
+
+/* Transición suave para los elementos de la barra */
+.navbar a,
+.regresar-btn,
+.dropbtn {
+  transition: transform 0.2s ease, font-weight 0.2s ease;
+}
+
+/* AGRANDAR + MÁS NEGRITA EN HOVER ....esoooooo */
+.navbar a:hover,
+.regresar-btn:hover,
+.dropbtn:hover {
+  transform: scale(1.08);   /* Aumenta un poquito */
+  font-weight: 700;          /* Más negrita */
+}
+
+/*Dropdown*/
+/* Contenedor principal del dropdown */
+.dropdown {
+  position: relative;  /* para posicionar el menú desplegable dentro del contenedor */
+  display: inline-block; /* Permite el dropdown se acomode en línea sin ocupar todo el ancho */
+}
+
+/* Botón visible del dropdown */
+.dropbtn {
+  background: transparent;  /* Sin fondo: mantiene diseño limpio */
+  border: none;   /* Sin borde para estilo minimalista */
+  font-size: 18px;  /* Tamaño del texto del botón */
+  cursor: pointer;    /* Cambia el cursor para indicar que es clickeable */
+  margin-left: 20px;   /* Espacio a la izquierda */
+  font-family: "Instrument Sans", sans-serif; /* Fuente */
+}
+
+/* Contenedor del menú desplegable */
+.dropdown-content {
+  display: none;  /* Oculto por defecto hasta hover */
+  position: absolute;   /* Se posiciona respecto al .dropdown */
+  background: white;   /* Fondo blanco del menú */
+  min-width: 160px;   /* Ancho mínimo */
+  box-shadow: 0px 6px 16px rgba(0,0,0,0.15); /* Sombra para efecto elevado */
+  border-radius: 6px;  /* Bordes redondeados */
+  padding: 10px 0;  /* Espaciado interno vertical */
+  z-index: 99999;      /* Asegura que quede por encima de otros elementos y no se tape*/
+}
+
+/* Estilos para cada link dentro del dropdown */
+.dropdown-content a {
+  display: block;    /* Cada enlace ocupa toda la fila */
+  padding: 10px 20px;  /* Espacio interno para el click */
+  text-decoration: none; /* Quita el subrayado */
+  color: #000;    /* Texto negro */
+  font-size: 15px;   /* Tamaño de letra */
+}
+
+/* Efecto hover en los links del menú */
+.dropdown-content a:hover {
+  background: #f0f0f0;  /* Fondo gris claro indica seleccion */
+}
+
+/* Muestra el menú cuando el usuario pasa el mouse por encima del dropdown */
+.dropdown:hover .dropdown-content {
+  display: block;  /* Despliega el menú duh*/
+}
+
+/* HERO */
+.hero2 {
+  min-height: 80vh;
+  height: calc(100vh - 64px);
+  margin-top: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Capa oscura encima de la imagen */
+.hero2::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(1px);
+  z-index: 1;
+}
+
+/* Contenido del hero */
+.hero2-center {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  font-family: "Instrument Sans", sans-serif;
+}
+
+/* Título principal del hero "F.I.H.G" */
+.hero2-center h1 {
+  font-size: clamp(56px, 8vw, 1000px); /* tamaño de tipografia */
+  text-align: center;
+  margin-left: 25px;   /* hacia la derecha */
+  line-height: 0.90;
+  font-weight: 700; /* Aplica negrita al texto */
+  letter-spacing: 8px;
+}
+
+/* Subtítulo del hero "Diseño Que Conecta" */
+.hero2-sub {
+  font-family: 'Playfair Display', serif; /* Fuente elegante serif */
+  text-align: center; /* Centrado de texto */
+  margin-top: 5px; 
+  margin-bottom: 5spx; /* Espaciado vertical */
+  font-size: clamp(18px,2.2vw,30px); /* Tamaño responsivo */
+  font-style: italic; /* Cursiva */
+}
+
+/* Texto de advertencia del hero */
+.hero2-warning {
+  font-size: clamp(14px,2.2vw,10px); /* Tamaño responsivo */
+  margin-top: 10px; 
+  margin-bottom: 5px; /* Espaciado vertical */
+  text-align: center; /* Centrado de texto */
+  color: #fff; /* Blanco */
+  opacity: 0.80; /* Transparencia del texto osea su opacidad*/
+}
+
+.zoom-img {
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+
+.zoom-img:hover {
+  transform: scale(1.06); /* Zoom suave */
+}
+
+.prototipo-img img {
+  width: 250px;      /* o el tamaño que uses tú */
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.prototipo-img img:hover {
+  transform: scale(1.1);
+}
+
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  padding: 20px;
+}
+
+.modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-img {
+  max-width: 100%;
+  max-height: 85vh; 
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.modal-close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: white;
+  color: #111;
+  border: none;
+  font-size: 28px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease;
+}
+
+.modal-close:hover {
+  transform: scale(1.1);
+}
+
+
+/* Introduccion */
+.Introduccion{
+ padding: clamp(48px,6vw,20px) 0; /* Espaciado arriba y abajo, responsive */
+ background: #fff; /* Fondo blanco */
+ font-family: "Instrument Sans", sans-serif; /* Fuente principal */
+}
+
+/* Contenedor de contenido sobre mi */
+.Introduccion.container {
+  display: grid;                     /* Layout tipo grid */
+  grid-template-columns: 1fr 1fr;    /* Dos columnas iguales */
+  gap: 48px;                          /* Espacio entre columnas */
+  align-items: start;                 /* Alinea contenido arriba */
+}
+
+/* Texto a la izquierda */
+.Introduccion-left {
+  transform: translateY(-15px); /* Sube el bloque 40px */
+  padding-left:40px /* Lo separa del borde izquierdo */
+}
+
+/* Columna izquierda y derecha alineadas */
+.Introduccion-text-left,
+.Introduccion-text-right {
+  padding-left: 0;
+}
+
+
+
+/* frase */
+.quote2 {
+  font-size: clamp(14px,1.2vw,20px); /* Tamaño responsive */
+  font-weight: 500;    /* Grosor medio/regular */
+  color: #000000;      /* Texto negro */
+  margin-bottom: 18px; /* Espacio debajo */
+  
+
+}
+
+
+/* Título principal del texto izquierdo malas juntas*/
+.Introduccion-text-left h2 {
+  font-size: clamp(40px,8vw,50px); /* Tamaño responsive grande */
+  line-height: 0.95;               /* Líneas bastante juntas */
+  font-weight: 700;                 /* Negrita */
+}
+
+/* Subtexto bajo el H2 */
+.subAutor {
+  margin-top: 16px;
+  font-size: clamp(13px,1.2vw,18px);
+  color: #444;
+}
+
+.Introduccion-star {
+  display: block;
+  margin: 100px auto 0; /* centrado debajo del nombre */
+  width: clamp(600px, 8vw, 1200px); 
+  margin-left: -150px;
+  filter: brightness(0.75) saturate(0%);
+}
+
+/* descripción */
+.bioMal {
+  font-size: clamp(14px,1.2vw,300px); /* Tamaño responsive */
+  margin-left: auto;  /* Empuja hacia la derecha */
+  margin-right: 20px; /* Separación desde el borde derecho */
+  max-width: 550px;   /* Ancho máximo para no alargarse demasiado */
+  text-align: left;  /* Texto alineado a la izquierda */
+  font-weight: 400;  /* Grosor normal */
+  font-style: italic; /* Cursiva */
+  line-height: 1.4;  /* Espacio entre líneas (interlineado) */
+}
+
+
+
+/* Imagen con tamaño fijo */
+.imgPreview {
+  display: block;
+  margin-top: 20px;
+  width: 100%;             /* Ocupa el ancho máximo permitido */
+  height: 600px;           /* Tamaño  */
+  object-fit: cover;       /* Recorta si es necesario */
+  background: #f7f7f7;          /* Fondo claro para ver el espacio */
+  border-radius: 6px;      
+}
+
+/* Texto debajo de la imagen */
+.imgText {
+  margin-top: 20px;
+  font-size: clamp(13px,1.2vw,18px);
+  color: #444;
+  line-height: 1.5;
+}
+
+.caja-cta {
+  background: #d9d9d9;
+  padding: 30px 0;
+  text-align: center;
+  font-size: 30px;
+  font-style: italic; /* Cursiva */
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0; /* evita espacios con otras secciones... uy claro despues de 4 intentos */
+}
+
+/* elimina el margin-top del <p> ...esooo mamona :)  */
+.caja-cta p {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Sección principal donde se ve el proceso */
+.proyecto2{
+  background: #ffffff !important;
+  padding-top: 60px;
+  padding-bottom: 30px;
+  width: 100%;
+  font-size: clamp(20px,6vw,30px); /* Tamaño de texto adaptable entre 40 y 72px osea que tiene su mn y su mx */
+  padding-left: 40px; /* Espacio a la izquierda del título */
+  font-weight: 700; /* Texto en negrita */
+  color: #000000;  /* Color de texto gris oscuro */
+}
+
+.proyecto2 h2 {
+  margin: 0;
+  padding: 0;
+}
+
+/* Texto debajo del H2 */
+.proyecto2-sub {
+  margin-top: 9px;
+  padding-left: -8px; 
+  font-size: clamp(20px, 1.5vw, 40px);
+  font-style: italic; /* Cursiva */
+  font-weight: 400;
+  color: #444;
+}
+
+
+/* Galería principal */
+.galeria2 {
+  background: #ffffff !important;
+  padding: 40px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 20px;
+  padding-right: 40px;
+}
+
+/* Cada item */
+.galeria2-item {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+  max-width: 430px;
+}
+
+
+/* Título */
+.galeria2-item h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  color: #000;
+}
+
+/* Texto */
+.galeria2-item p {
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0;
+  max-width: 360px;
+}
+
+/* Imagen */
+.galeria2-item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Responsive */
+
+/* Ajustes para pantallas medianas (tablets) Galeria */
+@media (max-width: 900px) {
+  .galeria2 img {
+    width: 300px;  /* Reduce tamaño de imagen */
+    height: 250px;
+  }
+}
+
+/* Ajustes para pantallas pequeñas (móviles)  Galeria */
+@media (max-width: 600px) {
+  .galeria2 {
+    grid-template-columns: repeat(2, 1fr); /* Cambia a 2 columnas */
+  }
+  .galeria2 img {
+    width: 180px; /* Reduce aún más la imagen */
+    height: 300px;
+  }
+}
+
+
+/* Introduccion */
+.Prototipos{
+ padding: clamp(20px,6vw,20px) 0; /* Espaciado arriba y abajo, responsive */
+ background: #fff; /* Fondo blanco */
+ font-family: "Instrument Sans", sans-serif; /* Fuente principal */
+}
+
+.Prototipos-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Izquierda / Derecha */
+  align-items: start;
+  gap: 40px;
+}
+
+/* Texto a la izquierda */
+.Prototipos-left {
+  transform: none;
+}
+
+/* Columna izquierda y derecha alineadas */
+.Prototipos-text-left,
+.Prototipos-text-right {
+  padding-left: 0;
+}
+
+
+/* Título principal del texto izquierdo malas juntas*/
+.Prototipos-text-left h2 {
+  font-size: clamp(40px,8vw,50px); /* Tamaño responsive grande */
+  line-height: 0.95;
+  font-weight: 700;
+  margin: 0;
+  padding-left: 40px;
+}
+
+
+/* descripción */
+.bioMal2 {
+  position: relative;
+  font-size: clamp(15px,1.2vw,20px); /* Tamaño responsive */
+  margin-left: auto;  /* Empuja hacia la derecha */
+  margin-right: 20px; /* Separación desde el borde derecho */
+  max-width: 550px;   /* Ancho máximo para no alargarse demasiado */
+  text-align: left;  /* Texto alineado a la izquierda */
+  font-weight: 400;  /* Grosor normal */
+  font-style: italic; /* Cursiva */
+  line-height: 1.4;  /* Espacio entre líneas (interlineado) */
+  top: -85px;
+  
+}
+
+
+/* CONTENEDOR GENERAL DE TODOS LOS PROTOTIPOS */
+.prototipos-wrapper {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 60px; /* separa cada prototipo */
+  font-family: "Instrument Sans", sans-serif;
+}
+
+/* BLOQUE INDIVIDUAL */
+.prototipo {
+  width: 100%;
+}
+
+
+/* TITULO (Prototipo 1, Prototipo 2…) */
+.prototipo-title {
+  font-size: clamp(20px, 3vw, 32px);
+  font-weight: 700;
+   margin-bottom: 8px;
+  padding-left: 40px;
+  margin-top: -45px; 
+}
+
+/* TEXTO DESCRIPTIVO */
+.prototipo-desc {
+  font-size: clamp(14px, 1.2vw, 18px);
+  color: #4a4a4a;
+  margin-bottom: 20px;
+  padding-left: 40px;
+  max-width: 900px;
+  line-height: 1.4;
+}
+
+/* CONTENEDOR DE IMAGEN */
+.prototipo-img {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* dos imágenes lado a lado jijijij*/
+  gap: 30px; /* separacion */
+  width: 100%;
+  padding: 0 40px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 70px;
+}
+
+/* imagen */
+.prototipo-img img {
+  width: 100%;   /* siempre ocupa el ancho total */
+  height:  280px;;    /* NO se estira hacia arriba */
+  object-fit: cover; /* mantiene proporción */
+  display: block;
+  border-radius: 8px;
+}
+
+
+/* Responsive (pantallas pequeñas) */
+@media (max-width: 700px) {
+  .prototipo-img {
+    grid-template-columns: 1fr; /* Se vuelven 1 imagen debajo de la otra */
+  }
+
+  .prototipo-img img {
+    height: 220px;
+  }
+}
+
+/* segundo estilo de mostrar las imaganes */
+.prototipo-grid-6 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 arriba + 3 abajo */
+  gap: 20px;
+  padding: 0 40px;
+  margin-top: 20px;
+  margin-bottom: 35px; /* espacio debajo de la galería */
+}
+
+.prototipo-grid-6 img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #eaeaea; 
+}
+
+
+/* Texto final debajo de la galería */
+.prototipo-final-text {
+  padding: 0 40px;
+  font-size: clamp(14px, 1.2vw, 18px);
+  color: #4a4a4a;
+  line-height: 1.4;
+  max-width: 1000px;
+}
+
+.bioMal2-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas en desktop */
+  gap: 20px;
+}
+
+/* Tablets – 2 columnas */
+@media (max-width: 900px) {
+  .bioMal2-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Celulares – 1 columna */
+@media (max-width: 600px) {
+  .bioMal2-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mockup-title {
+  font-size: clamp(24px, 3vw, 38px); 
+  font-weight: 700;
+  margin-top: 70px;   /* separa del bloque anterior */
+  margin-bottom: 50px; /* separa del grid de imágenes */
+  padding-left: 40px;  /* se alinea como lo demas  títulos cabe la redundancia..creo que asi se escribia la palabra*/
+  font-family: "Instrument Sans", sans-serif;
+}
+
+/* ahora para 4 imaganes qpara rellenar */
+.prototipo-img-4 {
+  grid-template-columns: repeat(2, 1fr);
+  padding: 0 40px;
+  gap: 30px;
+  width: 100%;
+  justify-content: center; /* centra las columnas */
+  align-items: center;      /* centra la altura */
+  padding: 0 40px;
+
+}
+
+/* Altura más grande para estas imágenes */
+.prototipo-img-4 img {
+  width: 80%;
+  height: 350px;
+  aspect-ratio: 1 / 1; /*se ajunta en fromato cuadrado*/
+  object-fit: cover; /*no deforma*/
+  border-radius: 8px;
+  display: block;
+  background: #eee; 
+  margin: 0 auto;     
+  display: block;
+}
+
+
+
+/* VERSION RESPONSIVE PARA 4 IMÁGENES */
+
+/* Tablets: 2 columnas */
+@media (max-width: 900px) {
+  .prototipo-img-4 {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .prototipo-img-4 img {
+    height: 250px; /* Ajuste de altura */
+  }
+}
+
+/* Celulares: 1 columna */
+@media (max-width: 600px) {
+  .prototipo-img-4 {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .prototipo-img-4 img {
+    height: 220px; /* Ajuste de altura móvil */
+  }
+}
+
+/* Parte inferior de la pagina empieza los conatctos /redes / © los derechos*/
+/* FOOTER */
+.footer {
+  background: #ffffff;
+  border-top: none;
+  font-family: "Instrument Sans", sans-serif;
+  padding: 20px 0 0 0;  /* ← margen mínimo arriba, nada abajo */
+  margin-top: 0px;
+}
+
+
+/* Contenedor gris */
+.footer-cta {
+  background: #d9d9d9;
+  padding: 30px 0;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 40px;
+}
+
+/* contenedor  */
+.footer-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;  /* izq. /cen. / der. */
+  align-items: center;
+  padding: 20px 40px;  /* margen */
+}
+
+/* logo en la izquierda */
+.footer .nav-logo {
+  width: 180px;
+  height: auto;
+  margin-left: 20px;
+  opacity: 0.9;
+}
+
+/* comtacto en el centro */
+.footer-col:nth-child(1) {
+  text-align: center;
+   text-align: left;
+  margin-left: auto;   /* Empuja todo el bloque hacia la derecha */
+  margin-right: -300px;  /* Separación del borde derecho */
+  margin-top: -270px;  /* para subir el bloque */
+  font-size: 20px;
+  line-height: 1.4;    /* Interlineado */
+}
+
+/* redes a la derecha */
+.footer-col:nth-child(2) {
+  text-align: left;
+  margin-left: auto;   /* Empuja todo el bloque hacia la derecha */
+  margin-right: -300px;  /* Separación del borde derecho */
+  margin-top: -270px;  /* para subir el bloque */
+  font-size: 20px;
+  line-height: 1.4;    /* Interlineado */
+}
+
+/* derechos reservados */
+.footer-copy {
+  background: #d9d9d9;
+  margin: 0;   /* sin margen arriba ni abajo */
+  padding: 15px 0;  /* barra donde estan los derechos */
+  font-size: 12px;
+  letter-spacing: 0.7px;
+  text-align: center;
+
+}
+
+@media (max-width: 480px) {
+  .Prototipos-text-right {
+    margin-top: 40px;
+  }
+
+  .bioMal2 {
+    display: block;
+    margin-top: 100px;
+    margin-left: 40px; 
+  }
+   
+}
+

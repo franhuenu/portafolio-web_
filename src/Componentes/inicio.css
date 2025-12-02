@@ -1,0 +1,948 @@
+
+
+/*Informacion de codigo para estilos en https://www.w3.org/ */
+
+/*  REINICIO DE ESTILOS GENERALES
+  Esto sirve para dejar todo limpio antes de empezar a diseñar.
+   Los navegadores meten sus propios márgenes y paddings,
+   y a veces las cosas se ven diferentes según el navegador.
+
+   Lo que hace este bloque:
+
+   - box-sizing: border-box; 
+     Hace que el tamaño de las cajas sea más fácil de manejar.
+
+   - margin: 0; padding: 0;
+     Quita todos los márgenes y espacios raros que vienen por defecto.
+
+   En resumen: limpia la base para que nuestro diseño sea igual en todos lados.
+*/
+
+/* Reiniciar */
+*{ 
+  box-sizing: border-box;  /* Incluye padding y border dentro del width/height */
+  margin: 0;  /* Elimina márgenes por defecto */
+  padding: 0; /* Elimina padding por defecto */
+
+
+/* Ajustes básicos de html, body y el root de React :3 */
+}
+
+html, body, #root {
+  height: auto;
+  min-height: auto; /* Asegura que siempre ocupe al menos toda la altura de la pantalla */
+   overflow-x: hidden !important; 
+}
+
+/*  Body y tipografia */
+body {
+  font-family: "Instrument Sans", sans-serif; /* Fuente principal */
+  color: #111; /* Color de texto */
+  background:  rgb(34, 43, 39); /* Fondo de la página */
+  -webkit-font-smoothing: antialiased;  /* Mejora suavizado de fuentes en Chrome/Safari */
+  -moz-osx-font-smoothing: grayscale; /* Mejora suavizado de fuentes en Firefox */
+}
+
+img { 
+  display: block;  /* Evita espacio debajo de imágenes inline */
+   max-width: 100%;  /* Escala la imagen al contenedor */
+   height: auto;   /* Mantiene proporción de la imagen , eso espero maldito codigo*/
+}
+
+a { color: inherit; } /* Enlaces heredan color y no tienen decoración por defecto */
+
+/* UTILIDADES */
+/* Contenedor centralizado con ancho máximo */
+.container { 
+  width: min(1200px, 92%); /* Máximo 1200px o 92% del ancho de pantalla */
+  margin: 0 auto; /* Centrado horizontal */
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  width: 100%;
+  height: 64px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  z-index: 9999;
+}
+
+/* Contenedor interno CORREGIDO */
+.navbar .container {
+  width: 100%;        /* ← SE ARREGLA AQUÍ */
+  max-width: 1200px;  /* Mantiene orden en pantallas grandes */
+  padding: 0 20px;    /* Bordes internos */
+  margin: 0 auto;     /* Centrado */
+  display: flex;
+  align-items: center;
+}
+
+/* Logo */
+.nav-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+   /* Evitar que no se anime pinche logo */
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+.nav-logo:hover {
+  transform: none !important;
+}
+
+/* Contenedor derecha */
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Links */
+.nav-right a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #0b0b0b;
+  letter-spacing: .5px;
+  font-family: "Instrument Sans", sans-serif;
+  transition: .2s;
+}
+
+.navbar a:hover { transform: scale(1.08); font-weight: 700; }
+
+/* DROPDOWN */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  font-family: "Instrument Sans", sans-serif;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: white;
+  min-width: 160px;
+  box-shadow: 0px 6px 16px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  padding: 10px 0;
+  z-index: 99999;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #000;
+  font-size: 15px;
+}
+
+.dropdown-content a:hover { background: #f0f0f0; }
+.dropdown:hover .dropdown-content { display: block; }
+
+
+/* HERO */
+/* Contenedor principal del hero */
+.hero {
+   min-height: 80vh; /* Ocupa al menos 80% de la altura de la ventana */
+  height: calc(100vh - 64px); /* Altura total menos navbar */
+  margin-top: 64px; /* Compensa altura navbar */
+  display: flex; /* Layout flexible */
+  align-items: center; /* Centrado vertical */
+  justify-content: center; /* Centrado horizontal */
+  position: relative; /* Para elementos posicionados internamente */
+  overflow: hidden; /* Oculta desbordes */
+}
+
+/* Fondo del hero */
+.hero::before {
+ content: ""; /* Elemento pseudo vacío */
+  position: absolute; /* Posicionado sobre el hero */
+  inset: 0; /* Ocupa todo el contenedor */
+  background: radial-gradient(1200px 600px at 10% 20%, 
+     rgba(40,45,42,0.6), rgba(10,12,11,0.95)); /* Gradiente radial */
+  transform: translateZ(0); /* Mejora performance de render */
+}
+
+/* Contenido central del hero */
+.hero-center {
+  position: relative; /* Para z-index */
+  z-index: 2; /* Sobre el fondo */
+  text-align: center; /* Centrado de texto */
+  color: #fff; /* Texto blanco */
+  font-family: "Instrument Sans", sans-serif; /* Fuente */
+}
+
+/* Título principal del hero "F.I.H.G" */
+.hero-center h1 {
+  font-size: clamp(56px, 8vw, 1000px); /* tamaño de tipografia */
+  text-align: center;
+  margin-left: 25px;   /* hacia la derecha */
+  line-height: 0.90;
+  font-weight: 700; /* Aplica negrita al texto */
+  letter-spacing: 8px;
+}
+
+/* Subtítulo del hero "Diseño Que Conecta" */
+.hero-sub {
+  font-family: 'Playfair Display', serif; /* Fuente elegante serif */
+  text-align: center; /* Centrado de texto */
+  margin-top: 10px; 
+  margin-bottom: 20px; /* Espaciado vertical */
+  font-size: clamp(18px,2.2vw,30px); /* Tamaño responsivo */
+  font-style: italic; /* Cursiva */
+}
+
+/* Texto de advertencia del hero */
+.hero-warning {
+  font-size: clamp(14px,2.2vw,10px); /* Tamaño responsivo */
+  margin-top: 10px; 
+  margin-bottom: 10px; /* Espaciado vertical */
+  text-align: center; /* Centrado de texto */
+  color: #fff; /* Blanco */
+  opacity: 0.50; /* Transparencia del texto osea su opacidad*/
+}
+
+/* Shapes */
+/* Ambas formas, izquierda y derecha */
+.hero-shape-left, .hero-shape-right {
+  position: absolute;/* Se posiciona libremente sobre el contenedor */
+  z-index: 1;  /* Detrás del contenido principal */
+  pointer-events: none;  /* No se puede hacer clic en ellas */
+}
+
+/* Forma izquierda */
+.hero-shape-left { 
+ left: 48px;  /* Se separa 48px del borde izquierdo */
+ top: 8%;     /* Se ubica al 8% desde arriba */
+ width: clamp(150px,12vw,320px); /* Ancho responsive entre 120px y 320px */
+
+}
+
+/* Forma derecha */
+.hero-shape-right { 
+ right: 48px;  /* Se separa 48px del borde derecho */
+ top: 50%;     /* Se ubica al 16% desde arriba */
+ width: clamp(150px,14vw,360px); /* Ancho responsive entre 120px y 360px */
+}
+
+
+
+/* --- SVG ANIMADOS DEL HERO --- */
+.animated-svg {
+  animation: pulse 2.2s infinite ease-in-out;
+  transition: transform 0.4s ease-out;
+}
+
+/* ANIMACIÓN PULSO*/
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.55); }
+  100% { transform: scale(1); }
+}
+
+
+/* SOBRE MI */
+.sobre-mi {
+ padding: clamp(48px,6vw,120px) 0; /* Espaciado arriba y abajo, responsive */
+ background: #fff; /* Fondo blanco */
+ font-family: "Instrument Sans", sans-serif; /* Fuente principal */
+}
+
+/* Contenedor de contenido sobre mi */
+.sobre-mi .container {
+  display: grid;                     /* Layout tipo grid */
+  grid-template-columns: 1fr 1fr;    /* Dos columnas iguales */
+  gap: 48px;                          /* Espacio entre columnas */
+  align-items: start;                 /* Alinea contenido arriba */
+}
+
+/* Texto a la izquierda */
+.sobre-text-left {
+  transform: translateY(-15px); /* Sube el bloque 40px */
+  padding-left: 40px;           /* Lo separa del borde izquierdo */
+}
+
+
+/* frase */
+.quote {
+  font-size: clamp(14px,1.2vw,20px); /* Tamaño responsive */
+  font-weight: 500;    /* Grosor medio/regular */
+  color: #000000;      /* Texto negro */
+  margin-bottom: 18px; /* Espacio debajo */
+}
+
+/* Título principal del texto izquierdo osea mi nombre :P*/
+.sobre-text-left h2 {
+  font-size: clamp(44px,8vw,88px); /* Tamaño responsive grande */
+  line-height: 0.95;   /* Líneas bastante juntas */
+  font-weight: 700;  /* Negrita */
+}
+
+/* descripción */
+.bio {
+  font-size: clamp(14px,1.2vw,300px); /* Tamaño responsive */
+  margin-left: auto;  /* Empuja hacia la derecha */
+  margin-top: -220px; /* Sube el bloque 250px */
+  margin-right: 20px; /* Separación desde el borde derecho */
+  max-width: 550px;   /* Ancho máximo para no alargarse demasiado */
+  text-align: left;  /* Texto alineado a la izquierda */
+  font-weight: 400;  /* Grosor normal */
+  font-style: italic; /* Cursiva */
+  line-height: 1.4;  /* Espacio entre líneas (interlineado) */
+}
+
+
+/* Lista de mis supuestas habilidades */
+.skills {
+  list-style: none;  /* Quita viñetas */
+  margin-top: 40px;  /* Separa de la bio */
+  margin-left: auto;  /* Empuja a la derecha (igual que bio) */
+  margin-right: 20px; /* Separación del borde derecho */
+  max-width: 550px;  /* Igual que la bio */
+  color: #5e5d5d;  /* Color gris oscuro */
+  font-size: clamp(14px,1.2vw,100px);
+  line-height: 1.9;  /* Espacio entre líneas */
+  text-align: left;   /* Alineado a la izquierda */
+}
+
+/* Cada item de skill */
+.skills li { 
+  margin-bottom: 2px;  /* Espacio entre cada habilidad osea como un interlineado */
+}
+
+.figura-media {
+  position: absolute; 
+  right: 0;
+  top: -225px;
+  width: clamp(400px, 20vw, 550px);
+  height: auto;
+  pointer-events: none;
+  z-index: 5;
+  filter: brightness(10%) saturate(30%) invert(60%) sepia(10%) saturate(30%) hue-rotate(100deg);
+}
+
+/* CONTENIDO */
+
+/* Estilos generales del contenedor principal */
+.contenido {
+  background: #d9d9d9; /* Fondo gris para tener claro que es el indice */
+  padding: clamp(36px,6vw,110px) 0;  /* Padding vertical adaptable según ancho de pantalla */
+  position: relative;  /* Permite posicionar elementos absolutos dentro  */
+  font-family: "Instrument Sans", sans-serif; /* Fuente principal  */
+}
+
+/* Contenedor interno con sistema de dos columnas */
+.contenido .container {
+  display: grid;   /* Activa layout de cuadrícula */
+  grid-template-columns: 1fr 1fr;  /* Crea dos columnas de igual tamaño */
+  align-items: center;    /* Centra verticalmente los elementos en cada columna */
+}
+
+/* Título de la sección */
+.contenido h2 {
+  font-size: clamp(40px,6vw,72px); /* Tamaño de texto adaptable entre 40 y 72px osea que tiene su mn y su mx */
+  padding-left: 40px;  /* Espacio a la izquierda del título */
+  font-weight: 700;   /* Texto en negrita */
+  color: #333;  /* Color de texto gris oscuro */
+}
+
+/* Indice de contenido */
+.contenido-grid ul {
+  list-style: none;  /* Quita las viñetas de la lista */
+  text-align: right;  /* Alinea el texto a la derecha inicialmente */
+  margin-left: auto;   /* Empuja la lista hacia la derecha dentro del grid */
+  font-size: clamp(16px,1.6vw,25px);  /* Tamaño del texto adaptable */
+  color: #333;    /* Color del texto */
+  margin-right: 20px;  /* Separación respecto al borde derecho */
+  max-width: 550px;    /* Ancho máximo para mejorar la lectura */
+  text-align: left;  /* Reajusta para alinear texto a la izquierda por coherencia */
+  line-height: 1.5;    /* Espaciado entre líneas para mejor lectura */
+}
+
+/* sub temas */
+.sub {
+  margin-left: 35px;  /* Desplaza este texto hacia la derecha */
+  line-height: 1.4;   /* Espaciado entre líneas */
+}
+
+/* Palabras destacadas dentro del texto */
+.contenido-grid span {
+  font-weight: 700; /* Negrita para resaltar palabras */
+  margin-right: 8px;  /* Espacio a la derecha del texto resaltado */
+}
+
+/* Imagen decorativa (estrella) dentro de la sección "contenido" */
+.contenido-star {
+  position: absolute;  /* Permite fijar su ubicación respecto al contenedor .contenido */
+  left: 6%;  /* La mueve hacia la izquierda un 6% */
+  bottom: -20px;  /* La baja un poco para que sobresalga */
+  width: clamp(300px,16vw,500px);  /* Tamaño adaptable de la imagen */
+}
+
+
+
+/* Sección principal */
+.proyectos {
+  background: #ffffff !important;
+  padding-top: 60px;
+  padding-bottom: 90px;
+  width: 100%;
+  font-size: clamp(30px,6vw,50px); /* Tamaño de texto adaptable entre 40 y 72px osea que tiene su mn y su mx */
+  padding-left: 40px; /* Espacio a la izquierda del título */
+  font-weight: 700; /* Texto en negrita */
+  color: #000000;  /* Color de texto gris oscuro */
+}
+
+/* Sección Proyecto */
+.nuevo-proyecto {
+  display: flex; /* Organiza los elementos en un contenedor flexible */
+  flex-direction: column;  /* Alinea los elementos en columna */
+  gap: 40px;    /* Espaciado vertical entre bloques */
+  margin-bottom: 40px;  /* Separación inferior respecto al siguiente contenido */
+  width: 100%;   /* Ocupa el ancho completo */
+}
+
+/* Contenedor general del carrusel */
+.proyecto-carrusel {
+  margin-top: 20px;  /* Espacio superior */
+  width: 100%; /* Carrusel a ancho completo */
+  overflow: hidden;  /* Oculta imagenes que salen del área visible */
+  position: relative;   /* Permite ubicar elementos */
+}
+
+/* Contenedor interno que se desplaza */
+.carrusel-inner {
+  display: flex;  /* Coloca las imagenes en fila */
+  gap: 10px;  /* Separación entre imagenes */
+  animation: slide 18s linear infinite; /* Animaxión de desplazamiento continuo */
+}
+
+/* Pausa la animacion cuando el usuario pone el mouse encima */
+.carrusel-inner:hover {
+  animation-play-state: paused;
+}
+
+/* Imágenes del carrusel */
+.carrusel-inner img {
+  width: 300px;   /* Ancho fijo */
+  height: 250px; /* Alto fijo */
+  object-fit: cover;  /* Recorta para que encaje sin deformarse la imagen*/
+  flex-shrink: 0;  /* Evita que las imágenes se compriman */
+  border-radius: 6px;   /* Bordes redondeados */
+  transition: transform 0.3s ease; /* Suaviza el efecto de hover */
+}
+
+/* Efecto de acercamiento al pasar el mouse */
+.carrusel-inner img:hover {
+  transform: scale(1.05);
+}
+
+/* Animación para movimiento infinito (scroll continuo) */
+@keyframes slide {
+  0%   { transform: translateX(0); }   /* Punto inicial */
+  100% { transform: translateX(-50%); }   /* Se mueve a la  mitad y asi  para repetir sin cortes */
+}
+
+/* Contenedor de la descripción bajo el carrusel */
+.proyecto-bottom {
+  display: flex;  /* Elementos en fila */
+  align-items: center; /* Alinea verticalmente */
+  gap: 20px;   /* Separación entre el título y la info */
+}
+
+/* Linea de titulo + label */
+.info-top {
+  display: flex;   /* Ordena en fila */
+  align-items: center;  /* Centrado vertical */
+  gap: 12px;    /* Espacio entre label y título */
+  padding-left: 10px;  /* Margen suave a la izquierda */
+  margin-bottom: 8px;    /* Separación respecto a la descripción */
+}
+
+/* Título del proyecto */
+.titulo-proyecto {
+  font-size: 15px;
+  font-weight: 600;   /* Negrita suave */
+  margin: 0;    /* Quita margen del H3 */
+  opacity: 0.9;    /* Leve suavizado del color */
+}
+
+/* Etiqueta pequeña antes del título */
+.label {
+  font-size: 15px;
+  opacity: 0.5;    /* Texto más suave */
+  margin: 0;     /* Quita margen */
+}
+
+.proyecto-izq {
+  display: flex;
+  flex-direction: column; /* h3 arriba - desc abajo */
+  align-items: flex-start; /* alinear todo a la izquierda */
+  padding-left: 85px; /* si quieres alinearlo como “Proyectos” */
+}
+.proyecto-izq .desc {
+  max-width: 360px;
+  font-size: clamp(9px,6vw,12px);
+  opacity: 0.75;
+  margin-top: 1px; /* separación entre h3 y el párrafo */
+  text-align: left; /* alineado a la izquierda */
+  margin-top: -45px;  /* para subir el bloque */
+  line-height: 1.4;
+}
+
+.proyecto-descripcion {
+  max-width: 600px;
+  font-size: clamp(11.5px,6vw,14px);
+  line-height: 1.6;  
+  opacity: 0.85;
+  margin-left: auto;   /* Empuja todo el bloque hacia la derecha */
+  margin-right: 20px;  /* Separación del borde derecho */
+  margin-top: -80px;  /* para subir el bloque */
+  max-width: 550px;    /* Controla el ancho */
+  text-align: left;    /* El texto sigue alineado hacia la izquierda */
+  font-weight: 900;    /* Tipo bold  */
+  line-height: 1.4;    /* Interlineado */
+}
+
+
+/* Botón ver proyecto */
+.ver {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding-bottom: 4px;
+  transition: opacity 0.3s;
+  margin-left: auto;   /* lleva todo el bloque hacia la derecha */
+  margin-right: 468px;  /* Separación del borde derecho */
+}
+
+
+/* Galería principal de imágenes */
+.galeria {
+  background: #ffffff !important;  /* Fondo blanco forzado (sobrescribe estilos previos) */
+  padding: 60px 0;    /* Espaciado vertical arriba y abajo */
+  display: grid;    /* Se usa grid layout para distribuir elementos */
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
+  gap: 10px;    /* Separación entre cada elemento del grid */
+  margin-top: 40px;    /* Espacio superior respecto a la sección anterior */
+}
+
+/* Contenedor individual de cada elemento (imagen + enlace) */
+.galeria div {
+  display: flex;    /* Permite apilar elementos fácilmente */
+  flex-direction: column;    /* Imagen arriba, texto abajo */
+  gap: 12px;     /* Espacio entre la imagen y el enlace */
+}
+
+/* Estilo de las imágenes */
+.galeria img {
+  width: 415px;   /* Ancho fijo de la imagen en escritorio */
+  height: 350px;    /* Alto fijo */
+  object-fit: cover;  /* Corta la imagen para ajustar sin deformar */
+  display: block;  /* Evita espacios extra propios de inline-block */
+  margin: 0 auto; /* Centra la imagen dentro de su contenedor */
+  border-radius: 6px;   /* Bordes ligeramente redondeados */
+  transition: transform .4s ease;
+  cursor: pointer;
+}
+
+/* Texto o enlace debajo de la imagen */
+.galeria a {
+  font-size: 14px;  /* Tamaño de texto */
+  text-decoration: none;   /* Quita el subrayado del enlace */
+  width: fit-content;   /* Ajusta el ancho solo al contenido */
+}
+
+.galeria img:hover {
+  transform: scale(1.08);
+}
+
+/* Fondo oscuro */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(3px);
+  z-index: 9999;
+}
+
+/* Contenedor del modal */
+.modal-content {
+  position: relative;
+  padding: 10px;
+  background: transparent;
+}
+
+/* Imagen tamaño REAL */
+.modal-img {
+  max-width: 90vw; /* no se sale de la pantalla */
+  max-height: 90vh; /* no se sale hacia abajo */
+  width: auto; /* usa su tamaño real */
+  height: auto;  /* usa su tamaño real ...media hora pero se logro */
+  border-radius: 8px;
+  display: block;
+  margin: auto;
+}
+
+/* Botón de cerrar (X) */
+.modal-close {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background: #fff;
+  border: none;
+  font-size: 20px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 8px rgba(0,0,0,0.4);
+}
+
+
+/* Animación */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive */
+
+/* Ajustes para pantallas medianas (tablets) Galeria */
+@media (max-width: 900px) {
+  .galeria img {
+    width: 300px;  /* Reduce tamaño de imagen */
+    height: 250px;
+  }
+}
+
+/* Ajustes para pantallas pequeñas (móviles)  Galeria */
+@media (max-width: 600px) {
+  .galeria {
+    grid-template-columns: repeat(2, 1fr); /* Cambia a 2 columnas */
+  }
+  .galeria img {
+    width: 180px; /* Reduce aún más la imagen */
+    height: 300px;
+  }
+}
+
+
+/* PROCESO */
+.proceso {
+  display: grid;
+  position: relative;
+  padding: 10px 0 0px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 50px 0;
+  font-family: "Instrument Sans", sans-serif;
+  background: #fff;
+}
+
+/* Estilos del bloque "proceso" */
+.proceso-left p {
+  position: relative;
+  font-size: 18px; /* Tamaño del texto */
+  line-height: 1.3;  /* Altura para mejora legibilidad */
+  color: #222;   /* Color  */
+  max-width: 380px;  /* Ancho máximo  */
+  padding-left: 45px;    /* Espacio interno a la izquierda (margen) */
+}
+
+
+
+/* Estilos de svg  decorativo de proceso */
+.proceso-star {
+  width: clamp(690px,10vw,1250px); /* Ajusta el ancho de forma responsiva según pantalla */
+  margin-left: -80px;
+}
+
+
+/* COLUMNA DERECHA */
+.proceso-right > div {
+  margin-bottom: 60px;
+}
+
+.proceso-right h2 {
+  font-size: clamp(48px, 5vw, 120px);
+  margin: 0;
+  font-weight: 700;
+}
+
+.p2 {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+/* SEPARADOR */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(0,0,0,0.1);
+  margin: 20px 0 25px;
+}
+
+/* BOTÓN "VER" */
+.ver {
+  display: inline-block;
+  margin-top: 20px;       /* BAJA un poco el botón */
+  font-size: 18px;
+  text-decoration: none;
+  color: black;
+}
+
+.ver:hover {
+  text-decoration: underline;
+}
+
+
+/* Parte inferior de la pagina empieza los conatctos /redes / © los derechos*/
+/* FOOTER */
+.footer {
+  background: #ffffff;
+  border-top: none;
+  font-family: "Instrument Sans", sans-serif;
+  padding: 20px 0 0 0;  /* ← margen mínimo arriba, nada abajo */
+  margin-top: 0px;
+}
+
+
+/* Contenedor gris */
+.footer-cta {
+  background: #d9d9d9;
+  padding: 30px 0;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 40px;
+}
+
+.footer-link {
+  color: inherit;        /* Usa el mismo color del texto */
+  text-decoration: none; 
+}
+
+.footer-link:hover {
+  text-decoration: underline; /* Se subraya al pasar el mouse */
+}
+
+
+
+
+/* RESPONSIVE / tamaño adapatbles a mano ...pipipipi */
+
+
+/*MOBILE (max-width: 480px)*/
+@media (max-width: 480px) {
+  
+
+  .navbar .container {
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  /* Mover dropdown a la izquierda SOLO en móvil */
+  .dropdown {
+    position: relative;
+    left: -35px;
+    left: -35px; 
+    top: 3px;
+    transform: scale(0.92);
+  }
+
+  /* Ajuste para que el menú no se corte */
+  .dropdown-content {
+    left: -20px;  
+    top: 32px;
+    min-width: 180px;
+  }
+
+  /* Aumenta el tamaño para tocarlo con el dedo */
+  .dropbtn {
+    font-size: 17px;
+  }
+
+  .nav-link {
+    font-size: 16px;
+  }
+
+  .bio {
+    padding-left: 40px; 
+    max-width: 100%;
+    margin-top: 0;
+  }
+   
+  /* Forma izquierda */
+  .hero-shape-left {
+    left: 20px;      /* Más hacia el borde */
+    top: 10%;        /* Más abajo */
+    width: 140px;    /* Más pequeña para encajar */
+  }
+
+  /* Forma derecha */
+  .hero-shape-right {
+    right: 10px;     /* pegada al borde derecho */
+    top: 65%;        /* Más abajo */
+    width: 150px;    /* Tamaño reducido */
+  }
+  .skills {
+    padding-left: 40px;
+    max-width: 100%;
+  }
+
+  /* CONTENIDO */
+  .contenido .container {
+    grid-template-columns: 1fr;
+  }
+  .contenido-grid ul {
+    margin: 0;
+    padding-left: 40px; 
+     max-width: 100%;
+    margin-top: 0;
+  }
+
+  /* PROYECTOS */
+  .proyecto-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .proyecto-descripcion {
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .proceso-right .ver {
+    margin-left: 45px;
+  }
+
+   /* Contenedor derecho */
+  .proceso-right {
+    padding-left: 0;  /* elimina desplazamiento hacia la derecha */
+  }
+
+  /* Títulos */
+  .proceso-right h2 {
+    text-align: left;
+    padding-left: 20px; /* mismo alineado que el p2 */
+  }
+  /* Estilo "p2" */
+ .p2 {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    white-space: normal; 
+    word-break: break-word;
+}
+ 
+.footer-columns {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* separa CONTACTO y Redes Sociales */
+    align-items: flex-start; /* alinear a la izquierda */
+    margin-top: -55px;
+  }
+
+ /* Solo baja la columna de Redes Sociales */
+  .footer-columns .footer-col:nth-of-type(2) {
+    margin-top:40px; 
+    margin-left: 70px;
+    margin-top: 0;
+    margin-bottom: 40px;
+  }
+  .footer-col {
+    text-align: center;
+  }
+
+ 
+
+  
+}
+
+@media (max-width: 720px) {
+  .nav-right a { display: none; }
+  .nav-logo { width: 42px; }
+  .hero-center h1 { font-size: clamp(36px, 8vw, 72px); }
+  .sobre-text-left h2 { font-size: clamp(28px,7vw,46px); }
+  .proyecto-imgs img { max-width: 100%; padding: 12px; }
+  .galeria img { height: 160px; }
+  .ver { font-size: 16px; }
+}
+
+/*TABLET HORIZONTAL / PANTALLAS MEDIANAS (max-width: 1024px) ojala esperemos*/
+@media (max-width: 768px) {
+
+  .sobre-mi .container {
+    grid-template-columns: 1fr;
+  }
+
+  .bio,
+  .skills {
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+  }
+
+  .contenido .container {
+    grid-template-columns: 1fr;
+  }
+
+  .proyecto-descripcion {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .sobre-mi .container, .proyecto-item, .proceso { grid-template-columns: 1fr; }
+  .contenido .container { grid-template-columns: 1fr; }
+  .contenido-star { display: none; }
+  .proyecto-imgs { justify-content: space-between; }
+  .galeria { grid-template-columns: repeat(2,1fr); }
+  .footer .container { grid-template-columns: 1fr; text-align: center; }
+}
+
+@media (min-width: 1920px) {
+  .hero-center {
+    transform: translateX(10px);
+  }
+
+  .hero-shape-left,
+  .hero-shape-right {
+    width: 22vw;
+  }
+}
+
+
+/* Estilo de accesibilidad (A11Y):
+   Este outline aparece cuando un enlace recibe foco al navegar con el teclado.
+   Sirve para que los usuarios que no usan mouse puedan ver qué elemento está seleccionado. W3C Accessibility */
+
+/* A11Y */
+a:focus { outline: 3px solid rgba(255, 255, 255, 0.2); outline-offset: 3px; }
