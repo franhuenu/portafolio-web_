@@ -196,14 +196,14 @@ const cerrarModal = () => {
 
 
 {/* P5.js */}
-<section className="p5-container">
-  <h2 className="p5-title">Demo de Osciloscopio tektronicx</h2>
+<section className="p52-container">
+  <h2 className="p52-title">Demo de Osciloscopio tektronicx</h2>
 
-  <div className="p5-frame-box">
+  <div className="p52-frame-box">
     <iframe
-      src="https://editor.p5js.org/Huenullan/full/HaOSksf4z"
+      src="https://editor.p5js.org/fransisca.huenullan/full/qW6CE2WNt"
       title="Osciloscopio tektronicx- p5.js"
-      className="p5-frame"
+      className="p52-frame"
       allow="fullscreen"
     ></iframe>
   </div>
